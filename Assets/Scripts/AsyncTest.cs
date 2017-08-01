@@ -15,10 +15,7 @@ public class AsyncTest : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E)) {
 			Debug.Log("Press E -> ");
 			OnUpPointFinished += UpPoint;
-			if (OnUpPointFinished != null) 
-			{
-				OnUpPointFinished (true);
-			}
+			StartCoroutine (AsyncCall ());
 			Debug.Log ("After UpPoint");
 		}
 			
@@ -47,5 +44,15 @@ public class AsyncTest : MonoBehaviour {
 		{
 			Debug.Log (success);
 		}
+	}
+
+	private IEnumerator  AsyncCall()
+	{
+		yield return new WaitForSeconds (3.0f);
+		if (OnUpPointFinished != null) 
+		{
+			UpPoint (true);
+		}
+
 	}
 }
